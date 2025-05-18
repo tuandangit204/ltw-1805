@@ -5,10 +5,9 @@ import {
     Toolbar,
     Typography,
 } from "@mui/material";
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 
 import { useLocation } from "react-router-dom";
-import models from "../../modelData/models";
 import "./styles.css";
 
 /**
@@ -26,16 +25,12 @@ function TopBar({ advancedView, setAdvancedView }) {
       return "User List";
     }
 
-    const userId = pathname.split("/").pop();
     if (pathname.includes("/users/")) {
-      const userDetail = models.userModel(userId);
-      return `${userDetail?.first_name} ${userDetail?.last_name}`;
+      return `User Detail`;
     }
 
     if (pathname.includes("/photos/")) {
-      const userDetail = models.userModel(userId);
-
-      return `${userDetail?.first_name} ${userDetail?.last_name}'s Photos`;
+      return `User's Photos`;
     }
   }, [pathname]);
 

@@ -1,21 +1,29 @@
 import {
-  Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Typography,
+    CircularProgress,
+    Paper,
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableHead,
+    TableRow,
+    Typography,
 } from "@mui/material";
-import React from "react";
 import { useNavigate } from "react-router-dom";
-import models from "../../modelData/models";
+import { useAllUser } from "../../hooks/user";
 import "./styles.css";
 
 function UserList() {
   const navigate = useNavigate();
-  const users = models.userListModel();
+  const { userList, isLoading } = useAllUser();
+
+  if (isLoading) {
+    return (
+      <div className="min-h-[calc(100vh-100px)] grid place-content-center">
+        <CircularProgress />
+      </div>
+    );
+  }
 
   return (
     <div className="p-2">
@@ -47,7 +55,7 @@ function UserList() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {users.map((row, index) => (
+            {userList.map((row, index) => (
               <TableRow
                 key={row._id}
                 hover

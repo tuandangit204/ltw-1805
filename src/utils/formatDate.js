@@ -1,8 +1,14 @@
-import { format, parse } from "date-fns";
+import { format } from "date-fns";
 
 const formatDate = (dateString) => {
-  const parsedDate = parse(dateString, "yyyy-MM-dd HH:mm:ss", new Date());
-  return format(parsedDate, "MMM d, yyyy 'at' h:mm a");
+    try {
+        const dateObj = new Date(dateString);
+
+        return format(dateObj, "MMM d, yyyy 'at' h:mm a");
+    } catch (e) {
+        console.error("Error parsing date:", e);
+        return dateString;
+    }
 };
 
 export default formatDate;

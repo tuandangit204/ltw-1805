@@ -1,9 +1,9 @@
-import React from "react";
 
+import { CircularProgress } from "@mui/material";
 import { FaIdCard, FaInfoCircle, FaUser } from "react-icons/fa";
 import { MdLocationOn } from "react-icons/md";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import models from "../../modelData/models";
+import { Link, useParams } from "react-router-dom";
+import { useUserById } from "../../hooks/user";
 import "./styles.css";
 
 /**
@@ -11,8 +11,15 @@ import "./styles.css";
  */
 function UserDetail() {
   const { userId } = useParams();
-  const userDetail = models.userModel(userId);
-  const userPhotos = models.photoOfUserModel(userId);
+  const { userDetail, isLoading } = useUserById(userId);
+
+  if (isLoading) {
+    return (
+      <div className="min-h-[calc(100vh-100px)] grid place-content-center">
+        <CircularProgress />
+      </div>
+    );
+  }
 
   return (
     <div className="p-8">
