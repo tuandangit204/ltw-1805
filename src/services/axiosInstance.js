@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const BASE_URL = 'https://d6lcqm-8081.csb.app'
+const BASE_URL = 'https://photo-sharing-server-apyt.onrender.com'
 
 const axiosInstance = axios.create({
     baseURL: BASE_URL + '/api',
